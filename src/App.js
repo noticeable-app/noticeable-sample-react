@@ -4,6 +4,8 @@ import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
+import {config} from './config';
+
 import Page1 from './Page1';
 import Page2 from './Page2';
 import Page3 from './Page3';
@@ -14,6 +16,14 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {appTitle: 'My app'};
+    }
+
+    componentDidMount() {
+        window.noticeable.render('widget', config.noticeable.iconWidgetId, {selector: '#noticeable-icon'});
+    }
+
+    componentWillUnmount() {
+        window.noticeable.destroy('widget', config.noticeable.iconWidgetId);
     }
 
     render() {
@@ -27,6 +37,9 @@ export default class App extends React.Component {
                             <li><Link to="/page1">Page 1</Link></li>
                             <li><Link to="/page2">Page 2</Link></li>
                             <li><Link to="/page3">Page 3</Link></li>
+                            <li>
+                                <div id="noticeable-icon"></div>
+                            </li>
                         </ul>
                     </div>
 
