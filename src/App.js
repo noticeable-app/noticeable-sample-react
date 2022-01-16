@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Link, Routes, Route} from 'react-router-dom';
 
 import logo from './logo.svg';
 import './App.css';
@@ -28,7 +28,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <Router>
+            <BrowserRouter>
                 <div className="App">
                     <div className="toolbar" role="banner">
                         <img src={logo} className="App-logo" alt="logo"/><span>{this.state.appTitle}</span>
@@ -44,23 +44,15 @@ export default class App extends React.Component {
                     </div>
 
                     <div className="content" role="main">
-                        <Switch>
-                            <Route exact path="/">
-                                <Page1/>
-                            </Route>
-                            <Route path="/page1">
-                                <Page1/>
-                            </Route>
-                            <Route path="/page2">
-                                <Page2/>
-                            </Route>
-                            <Route path="/page3">
-                                <Page3/>
-                            </Route>
-                        </Switch>
+                        <Routes>
+                            <Route path="/" element={<Page1/>} />
+                            <Route path="page1" element={<Page1/>} />
+                            <Route path="page2" element={<Page2/>} />
+                            <Route path="page3" element={<Page3/>} />
+                        </Routes>
                     </div>
                 </div>
-            </Router>
+            </BrowserRouter>
         );
     }
 
