@@ -1,13 +1,26 @@
+import { useEffect } from 'react'
 import { Link, Route, Routes } from 'react-router'
 
 import Page1 from './Page1'
 import Page2 from './Page2'
 import Page3 from './Page3'
 
+import { config } from './config'
+
 import logo from './logo.svg'
 import './App.css'
 
 export default function App() {
+  useEffect(() => {
+    window.noticeable.render('widget', config.noticeable.iconWidgetId, {
+      selector: '#noticeable-icon',
+    })
+
+    return () => {
+      window.noticeable.destroy('widget', config.noticeable.iconWidgetId)
+    }
+  }, [])
+
   return (
     <div className="App">
       <div className="toolbar" role="banner">
@@ -18,6 +31,9 @@ export default function App() {
           <li><Link to="/page1">Page 1</Link></li>
           <li><Link to="/page2">Page 2</Link></li>
           <li><Link to="/page3">Page 3</Link></li>
+          <li>
+            <div id="noticeable-icon"></div>
+          </li>
         </ul>
       </div>
 
